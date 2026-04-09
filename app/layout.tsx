@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Exo_2, IBM_Plex_Mono, Manrope } from "next/font/google";
+import { Manrope, Merriweather } from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -7,21 +7,16 @@ const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
 });
 
-const exo2 = Exo_2({
-  variable: "--font-exo-2",
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
   subsets: ["latin", "cyrillic"],
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata: Metadata = {
   title: "Веб болон систем хөгжүүлэлт",
   description:
-    "Веб, admin, booking болон backend систем хөгжүүлэлтийн танилцуулга, ажлын нөхцөл, технологи, үнийн жишиг.",
+    "Веб, admin, booking болон backend систем хөгжүүлэлтийн танилцуулга, төслүүд, ажлын нөхцөл, үнийн санал.",
 };
 
 export default function RootLayout({
@@ -30,10 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="mn"
-      className={`${manrope.variable} ${exo2.variable} ${ibmPlexMono.variable}`}
-    >
+    <html lang="mn" className={`${manrope.variable} ${merriweather.variable}`}>
       <body>{children}</body>
     </html>
   );
