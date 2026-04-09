@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5efe6;
+  --foreground: #162320;
+  --muted: #576660;
+  --muted-strong: #2f5c56;
+  --surface: rgba(255, 252, 247, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.82);
+  --border: rgba(22, 35, 32, 0.1);
+  --accent: #119491;
+  --accent-strong: #0f6767;
+  --highlight: #ff8d61;
+  --ink-soft: #e6efe9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-display: var(--font-exo-2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  margin: 0;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(17, 148, 145, 0.14), transparent 28%),
+    radial-gradient(circle at 80% 15%, rgba(255, 141, 97, 0.2), transparent 24%),
+    linear-gradient(180deg, #fbf7f0 0%, var(--background) 52%, #efe3d3 100%);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(22, 35, 32, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 35, 32, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 95%);
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, 18px, 0);
+  }
+}
+
+.reveal {
+  animation: reveal 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.float-slow {
+  animation: float 12s ease-in-out infinite;
+}
+
+.glass-panel {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(255, 251, 246, 0.6));
+  box-shadow: 0 24px 60px rgba(30, 44, 39, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.glass-card {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface-strong), var(--surface));
+  box-shadow: 0 18px 42px rgba(30, 44, 39, 0.09);
+  backdrop-filter: blur(18px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 35, 32, 0.08);
+  background: rgba(255, 255, 255, 0.62);
+  padding: 0.72rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(15, 103, 103, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(17, 148, 145, 0.1);
+  padding: 0.72rem 1rem;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent-strong);
+}
+
+.cta-primary,
+.cta-secondary {
+  display: inline-flex;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.9rem 1.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.cta-primary {
+  background: var(--foreground);
+  color: white;
+  box-shadow: 0 16px 28px rgba(22, 35, 32, 0.18);
+}
+
+.cta-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 32px rgba(22, 35, 32, 0.22);
+}
+
+.cta-secondary {
+  border: 1px solid rgba(22, 35, 32, 0.1);
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--foreground);
+}
+
+.cta-secondary:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.86);
 }
